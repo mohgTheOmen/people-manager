@@ -1,4 +1,7 @@
 function PersonCard({ person }) {
+    const group = person.groupName ?? person.group ?? '-';
+    const skills = person.skills ?? [];
+
     return (
         <div className="person-card">
 
@@ -11,11 +14,11 @@ function PersonCard({ person }) {
             </p>
 
             <p>
-                <strong>Group:</strong> {person.group}
+                <strong>Group:</strong> {group}
             </p>
 
             <div className="skills">
-                {person.skills.map((skill) => (
+                {skills.map((skill) => (
                     <span className="skill" key={skill}>
                         {skill}
                     </span>

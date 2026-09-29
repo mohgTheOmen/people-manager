@@ -71,3 +71,11 @@ header p {
     outline: none;
     border-color: #5577dd;
 }
+
+.status-message {
+    margin-bottom: 20px;
+}
+
+.status-message.error {
+    color: #b00020;
+}
