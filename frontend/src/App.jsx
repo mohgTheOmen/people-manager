@@ -1,0 +1,57 @@
+import './App.css'
+import PersonCard from './components/PersonCard'
+import SearchBar from './components/SearchBar'
+import { people } from './data/people'
+import { useState } from 'react'
+
+function App() {
+    const [search, setSearch] = useState("");
+
+    const filteredPeople = people.filter((person) => {
+
+        const query = search.toLowerCase();
+
+        const fullName =
+            `${person.firstName} ${person.lastName}`.toLowerCase();
+
+        const matchesName =
+            fullName.includes(query);
+
+        const matchesGroup =
+            person.group.toLowerCase().includes(query);
+
+        const matchesSkills =
+            person.skills.some((skill) =>
+                skill.toLowerCase().includes(query)
+            );
+
+        return matchesName || matchesGroup || matchesSkills;
+    });
+
+    return (
+         <div className="container">
+
+                <header>
+                    <h1>Group Finder</h1>
+                    <p>Find people by name, group or skills.</p>
+                </header>
+
+                <SearchBar
+                    search={search}
+                    setSearch={setSearch}
+                />
+
+                <main className="people-grid">
+                    {filteredPeople.map((person) => (
+                        <PersonCard
+                            key={person.id}
+                            person={person}
+                        />
+                    ))}
+                </main>
+
+            </div>
+    )
+}
+
+export default App
